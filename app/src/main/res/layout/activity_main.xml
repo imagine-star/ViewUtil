@@ -8,11 +8,9 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="Hello World!"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myTestView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
