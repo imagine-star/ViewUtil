@@ -33,6 +33,9 @@ public class DrawCorner {
      * radii：四个圆角半径，依次是左上、右上、右下、左下
      * */
     public static GradientDrawable drawCorner(float[] radii) {
+        if (radii == null || radii.length != 8) {
+            radii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+        }
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadii(radii);
         drawable.setColor(Color.WHITE);
@@ -55,10 +58,13 @@ public class DrawCorner {
     /*
      * 默认绘制圆角函数
      * 参数：
-     * radii：四个圆角半径，依次是左上、右上、右下、左下
+     * radii：四个圆角半径，依次是左上x、左上y、右上x、右上y、右下x、右下y、左下x、左下y
      * color：背景色
      * */
     public static GradientDrawable drawCorner(float[] radii, int color) {
+        if (radii == null || radii.length != 8) {
+            radii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+        }
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadii(radii);
         drawable.setColor(color);
@@ -69,7 +75,7 @@ public class DrawCorner {
      * 默认绘制圆角函数
      * 参数：
      * radius：圆角半径
-     * colors：渐变背景色，默认垂直渐变
+     * colors：渐变背景色
      * */
     public static GradientDrawable drawCorner(int radius, int[] colors) {
         GradientDrawable drawable = new GradientDrawable();
@@ -82,10 +88,13 @@ public class DrawCorner {
     /*
      * 默认绘制圆角函数
      * 参数：
-     * radii：四个圆角半径，依次是左上、右上、右下、左下
-     * colors：渐变背景色，默认垂直渐变
+     * radii：四个圆角半径，依次是左上x、左上y、右上x、右上y、右下x、右下y、左下x、左下y
+     * colors：渐变背景色
      * */
     public static GradientDrawable drawCorner(float[] radii, int[] colors) {
+        if (radii == null || radii.length != 8) {
+            radii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+        }
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadii(radii);
         drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
@@ -97,7 +106,7 @@ public class DrawCorner {
      * 默认绘制圆角函数
      * 参数：
      * radius：圆角半径
-     * colors：渐变背景色，默认垂直渐变
+     * colors：渐变背景色
      * orientation：渐变类型（ 0：上到下，1：右上到左下，2：右到左，3：右下到左上，4：下到上，5：左下到右上，6：左到右，7：左上到右下 ）
      * */
     public static GradientDrawable drawCorner(int radius, int[] colors, int orientation) {
@@ -138,10 +147,13 @@ public class DrawCorner {
      * 默认绘制圆角函数
      * 参数：
      * radii：四个圆角半径，依次是左上、右上、右下、左下
-     * colors：渐变背景色，默认垂直渐变
+     * colors：渐变背景色
      * orientation：渐变类型（ 0：上到下，1：右上到左下，2：右到左，3：右下到左上，4：下到上，5：左下到右上，6：左到右，7：左上到右下 ）
      * */
     public static GradientDrawable drawCorner(float[] radii, int[] colors, int orientation) {
+        if (radii == null || radii.length != 8) {
+            radii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+        }
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadii(radii);
         drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
@@ -179,7 +191,7 @@ public class DrawCorner {
      * 默认绘制圆角函数
      * 参数：
      * radius：圆角半径
-     * colors：渐变背景色，默认垂直渐变
+     * colors：渐变背景色
      * type：渐变类型（ GradientDrawable.LINEAR_GRADIENT：垂直渐变，GradientDrawable.SWEEP_GRADIENT：扫描式渐变，GradientDrawable.RADIAL_GRADIENT：圆形渐变 ）*/
 //    public static GradientDrawable drawCorner(int radius, int[] colors, int type) {
 //        GradientDrawable drawable = new GradientDrawable();

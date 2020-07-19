@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         TextView textView = findViewById(R.id.test);
-        textView.setBackground(DrawCorner.drawCorner(20, new int[]{Color.YELLOW, Color.RED}));
+        textView.setBackground(DrawCorner.drawCorner(new float[]{0, 0, 20, 20, 20, 20, 0, 0}, new int[]{Color.GREEN, Color.BLUE}));
 
     }
 }
