@@ -65,12 +65,12 @@ public class MainActivity extends Activity {
                             getColor(R.color.blue),
                             getColor(R.color.mediumblue),
                             getColor(R.color.purple)}, 6));
-            StringBuilder string = new StringBuilder("~");
-            for (int i = 0; i < adapterList.get(position); i++) {
-                string.append("~");
-            }
-            holder.myTestItem.setText(string.toString());
-//            holder.myTestItem.setText("测试视图" + adapterList.get(position) + "：渐变颜色");
+//            StringBuilder string = new StringBuilder("~");
+//            for (int i = 0; i < adapterList.get(position); i++) {
+//                string.append("~");
+//            }
+//            holder.myTestItem.setText(string.toString());
+            holder.myTestItem.setText("测试视图" + adapterList.get(position) + "：渐变颜色");
         }
 
         @Override
