@@ -14,11 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.model.AutoViewDataModel;
+import com.example.my_interface.IViewInsideClick;
+import com.example.viewutil.AutoLinearLayout;
 import com.example.viewutil.DensityUtil;
 import com.example.viewutil.DrawCorner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class MainActivity extends Activity {
 
@@ -33,12 +37,33 @@ public class MainActivity extends Activity {
             list.add(i);
         }
 
-        RecyclerView recyclerView = findViewById(R.id.myTestView);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        MyTestAdapter myTestAdapter = new MyTestAdapter(list);
-        recyclerView.setAdapter(myTestAdapter);
+//        RecyclerView recyclerView = findViewById(R.id.myTestView);
+//        LinearLayoutManager manager = new LinearLayoutManager(this);
+//        manager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(manager);
+//        MyTestAdapter myTestAdapter = new MyTestAdapter(list);
+//        recyclerView.setAdapter(myTestAdapter);
+
+        AutoLinearLayout autoLinearLayout = findViewById(R.id.auto_linearlayout);
+        autoLinearLayout.setOutMargin(10, 10);
+        autoLinearLayout.setItemMargin(10, 5, 10, 5);
+        autoLinearLayout.setPadding(7, 3, 7, 3);
+        StringBuilder showString = new StringBuilder();
+        List<AutoViewDataModel> viewList = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            if (i % 9 == 0) {
+                showString = new StringBuilder();
+            }
+            showString.append("啦");
+            viewList.add(new AutoViewDataModel(String.valueOf(i), showString.toString()));
+        }
+        autoLinearLayout.setData(viewList);
+        autoLinearLayout.setViewInsideClick(new IViewInsideClick() {
+            @Override
+            public void onChildClick(View view) {
+                System.out.println(view.getTag().toString());
+            }
+        });
 
     }
 
