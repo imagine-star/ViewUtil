@@ -26,16 +26,16 @@ import java.util.Vector;
 
 public class MainActivity extends Activity {
 
-    List<Integer> list = new ArrayList<>();
+    private List<Integer> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int i = 0; i < 1000; i++) {
-            list.add(i);
-        }
+//        for (int i = 0; i < 1000; i++) {
+//            list.add(i);
+//        }
 
 //        RecyclerView recyclerView = findViewById(R.id.myTestView);
 //        LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -61,7 +61,14 @@ public class MainActivity extends Activity {
         autoLinearLayout.setViewInsideClick(new IViewInsideClick() {
             @Override
             public void onChildClick(View view) {
-                System.out.println(view.getTag().toString());
+                String string = view.getTag().toString();
+                System.out.println(string);
+            }
+
+            @Override
+            public void getTag(String tag) {
+                String string = tag;
+                System.out.println(string);
             }
         });
 

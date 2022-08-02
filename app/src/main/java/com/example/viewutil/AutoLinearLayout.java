@@ -125,6 +125,7 @@ public class AutoLinearLayout extends LinearLayout {
                 public void onClick(View v) {
                     if (viewInsideClick != null) {
                         viewInsideClick.onChildClick(v);
+                        viewInsideClick.getTag(v.getTag().toString());
                     }
                 }
             });
