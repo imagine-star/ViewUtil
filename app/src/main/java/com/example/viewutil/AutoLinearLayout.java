@@ -2,6 +2,7 @@ package com.example.viewutil;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ public class AutoLinearLayout extends LinearLayout {
     private int leftMargin = 10, topMargin = 5, rightMargin = 10, bottomMargin = 5;
     private int leftPadding = 7, topPadding = 3, rightPadding = 7, bottomPadding = 3;
     private int left = 10, right = 10;
+    private int textColor = 0, textSize = 14;
+    private Drawable background;
 
     private IViewInsideClick viewInsideClick;
 
@@ -38,6 +41,18 @@ public class AutoLinearLayout extends LinearLayout {
     public void setData(List<AutoViewDataModel> viewList) {
         this.viewList = viewList;
         init();
+    }
+
+    public void setChildTextColor(int textColor) {
+        this.textColor = textColor;
+    }
+
+    public void setChildTextSize(int textSize) {
+        this.textSize = textSize;
+    }
+
+    public void setChildGround(Drawable background) {
+        this.background = background;
     }
 
     /*
@@ -115,9 +130,9 @@ public class AutoLinearLayout extends LinearLayout {
             textParams.setMargins(getPx(leftMargin), getPx(topMargin), getPx(rightMargin), getPx(bottomMargin));
             textView.setLayoutParams(textParams);
             textView.setPadding(getPx(leftPadding), getPx(topPadding), getPx(rightPadding), getPx(bottomPadding));
-            textView.setBackground(DrawCorner.drawCorner(15, context.getColor(R.color.white)));
-            textView.setTextSize(14);
-            textView.setTextColor(context.getColor(R.color.blue));
+            textView.setBackground(background);
+            textView.setTextSize(textSize);
+            textView.setTextColor(textColor == 0 ? context.getColor(R.color.black) : textColor);
             textView.setTag(dataModel.getId());
             textView.setText(dataModel.getName());
             textView.setOnClickListener(new OnClickListener() {
@@ -125,7 +140,6 @@ public class AutoLinearLayout extends LinearLayout {
                 public void onClick(View v) {
                     if (viewInsideClick != null) {
                         viewInsideClick.onChildClick(v);
-                        viewInsideClick.getTag(v.getTag().toString());
                     }
                 }
             });

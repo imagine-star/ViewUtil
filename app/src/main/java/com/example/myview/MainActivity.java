@@ -48,6 +48,9 @@ public class MainActivity extends Activity {
         autoLinearLayout.setOutMargin(10, 10);
         autoLinearLayout.setItemMargin(10, 5, 10, 5);
         autoLinearLayout.setPadding(7, 3, 7, 3);
+        autoLinearLayout.setChildGround(DrawCorner.drawCorner(15, getColor(R.color.white)));
+        autoLinearLayout.setChildTextSize(14);
+        autoLinearLayout.setChildTextColor(getColor(R.color.blue));
         StringBuilder showString = new StringBuilder();
         List<AutoViewDataModel> viewList = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
@@ -62,12 +65,6 @@ public class MainActivity extends Activity {
             @Override
             public void onChildClick(View view) {
                 String string = view.getTag().toString();
-                System.out.println(string);
-            }
-
-            @Override
-            public void getTag(String tag) {
-                String string = tag;
                 System.out.println(string);
             }
         });

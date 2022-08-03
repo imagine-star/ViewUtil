@@ -6,6 +6,4 @@ public interface IViewInsideClick {
 
     void onChildClick(View view);
 
-    void getTag(String tag);
-
 }
