@@ -2,6 +2,7 @@ package com.example.viewutil;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -102,7 +103,7 @@ public class AutoLinearLayout extends LinearLayout {
     public AutoLinearLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        init();
+//        init();
     }
 
     private int getViewWidth(View view) {
@@ -112,11 +113,18 @@ public class AutoLinearLayout extends LinearLayout {
     }
 
     private void init() {
+
+        if (viewList == null || viewList.isEmpty()) {
+            return;
+        }
+
         this.removeAllViews();
         this.setOrientation(VERTICAL);
 
-        WindowManager windowManager = ((Activity) context).getWindowManager();
-        int width = windowManager.getDefaultDisplay().getWidth() - getPx(left) - getPx(right);
+//        WindowManager windowManager = ((Activity) context).getWindowManager();
+//        int width = windowManager.getDefaultDisplay().getWidth() - getPx(left) - getPx(right);
+
+        int width = this.getMeasuredWidth();
 
         LinearLayout lineLin = new LinearLayout(context);
         LinearLayout.LayoutParams lineLinParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
