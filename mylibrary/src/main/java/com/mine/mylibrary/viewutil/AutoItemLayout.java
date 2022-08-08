@@ -52,6 +52,9 @@ public class AutoItemLayout extends LinearLayout {
                 }
             }
         }
+        if (measureHeight == 0) {
+            measureHeight = tempHeight;
+        }
         setMeasuredDimension(getMeasuredWidth(), measureHeight);
     }
 
