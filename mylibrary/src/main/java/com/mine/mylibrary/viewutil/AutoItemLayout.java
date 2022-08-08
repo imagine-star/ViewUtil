@@ -45,6 +45,8 @@ public class AutoItemLayout extends LinearLayout {
                     measureHeight = measureHeight + tempHeight;
                     tempHeight = 0;
                     lastRight = layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
+                    int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
+                    tempHeight = Math.max(compareHeight, tempHeight);
                 } else {
                     int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
                     tempHeight = Math.max(compareHeight, tempHeight);
@@ -52,8 +54,8 @@ public class AutoItemLayout extends LinearLayout {
                 }
             }
         }
-        if (measureHeight == 0) {
-            measureHeight = tempHeight;
+        if (tempHeight != 0) {
+            measureHeight += tempHeight;
         }
         setMeasuredDimension(getMeasuredWidth(), measureHeight);
     }
@@ -78,6 +80,9 @@ public class AutoItemLayout extends LinearLayout {
                     right = layoutParams.getMarginStart() + getViewWidth(child);
                     bottom = lastBottom + layoutParams.topMargin + getViewHeight(child);
                     lastRight = layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
+
+                    int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
+                    tempHeight = Math.max(compareHeight, tempHeight);
                 } else {
                     left = lastRight + layoutParams.getMarginStart();
                     top = lastBottom + layoutParams.topMargin;

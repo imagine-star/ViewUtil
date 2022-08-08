@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         AutoItemLayout autoLinearLayout = findViewById(R.id.auto_linearlayout);
         StringBuilder showString = new StringBuilder();
         List<AutoViewDataModel> viewList = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 3; i++) {
             if (i % 11 == 0) {
                 showString = new StringBuilder();
             }
