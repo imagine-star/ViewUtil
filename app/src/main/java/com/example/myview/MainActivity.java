@@ -1,9 +1,7 @@
 package com.example.myview;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.model.AutoViewDataModel;
-import com.example.my_interface.IViewInsideClick;
-import com.example.viewutil.AutoLinearLayout;
+import com.example.viewutil.AutoItemLayout;
 import com.example.viewutil.DensityUtil;
 import com.example.viewutil.DrawCorner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class MainActivity extends Activity {
 
@@ -44,30 +39,31 @@ public class MainActivity extends Activity {
 //        MyTestAdapter myTestAdapter = new MyTestAdapter(list);
 //        recyclerView.setAdapter(myTestAdapter);
 
-        AutoLinearLayout autoLinearLayout = findViewById(R.id.auto_linearlayout);
-        autoLinearLayout.setOutMargin(10, 10);
-        autoLinearLayout.setItemMargin(10, 5, 10, 5);
-        autoLinearLayout.setPadding(7, 3, 7, 3);
-        autoLinearLayout.setChildGround(DrawCorner.drawCorner(15, getColor(R.color.white)));
-        autoLinearLayout.setChildTextSize(14);
-        autoLinearLayout.setChildTextColor(getColor(R.color.blue));
+        AutoItemLayout autoLinearLayout = findViewById(R.id.auto_linearlayout);
         StringBuilder showString = new StringBuilder();
         List<AutoViewDataModel> viewList = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            if (i % 9 == 0) {
+        for (int i = 0; i < 40; i++) {
+            if (i % 11 == 0) {
                 showString = new StringBuilder();
             }
             showString.append("啦");
             viewList.add(new AutoViewDataModel(String.valueOf(i), showString.toString()));
         }
-        autoLinearLayout.setData(viewList);
-        autoLinearLayout.setViewInsideClick(new IViewInsideClick() {
-            @Override
-            public void onChildClick(View view) {
-                String string = view.getTag().toString();
-                System.out.println(string);
-            }
-        });
+        for (AutoViewDataModel dataModel : viewList) {
+            TextView textView = new TextView(this);
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            textParams.setMargins(DensityUtil.dip2px(this, 10), DensityUtil.dip2px(this, 5),
+                    DensityUtil.dip2px(this, 10), DensityUtil.dip2px(this, 5));
+            textView.setLayoutParams(textParams);
+            textView.setPadding(DensityUtil.dip2px(this, 7), DensityUtil.dip2px(this, 4),
+                    DensityUtil.dip2px(this, 7), DensityUtil.dip2px(this, 4));
+            textView.setBackground(DrawCorner.drawCorner(15, getColor(R.color.white)));
+            textView.setTextSize(14);
+            textView.setTextColor(getColor(R.color.blue));
+            textView.setTag(dataModel.getId());
+            textView.setText(dataModel.getName());
+            autoLinearLayout.addView(textView);
+        }
 
     }
 
