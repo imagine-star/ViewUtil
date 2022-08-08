@@ -10,7 +10,7 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <com.example.viewutil.AutoItemLayout
+    <com.mine.mylibrary.viewutil.AutoItemLayout
         android:id="@+id/auto_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,6 +78,6 @@
             android:background="@color/white"
             android:text="选择我"/>
 
-    </com.example.viewutil.AutoItemLayout>
+    </com.mine.mylibrary.viewutil.AutoItemLayout>
 
 </LinearLayout>

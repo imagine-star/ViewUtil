@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.model.AutoViewDataModel;
-import com.example.viewutil.AutoItemLayout;
 import com.example.viewutil.DensityUtil;
-import com.example.viewutil.DrawCorner;
+import com.mine.mylibrary.viewutil.AutoItemLayout;
+import com.mine.mylibrary.viewutil.DrawCorner;
 
 import java.util.ArrayList;
 import java.util.List;
