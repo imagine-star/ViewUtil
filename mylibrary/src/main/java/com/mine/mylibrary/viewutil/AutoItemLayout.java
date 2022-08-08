@@ -40,19 +40,15 @@ public class AutoItemLayout extends LinearLayout {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
                 final LayoutParams layoutParams = (LayoutParams) child.getLayoutParams();
-                if (i == 0) {
+                int childLong = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
+                if (childLong > getMeasuredWidth()) {
+                    measureHeight = measureHeight + tempHeight;
+                    tempHeight = 0;
                     lastRight = layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
                 } else {
-                    int childLong = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
-                    if (childLong > getMeasuredWidth()) {
-                        measureHeight = measureHeight + tempHeight;
-                        tempHeight = 0;
-                        lastRight = layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
-                    } else {
-                        int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
-                        tempHeight = Math.max(compareHeight, tempHeight);
-                        lastRight = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
-                    }
+                    int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
+                    tempHeight = Math.max(compareHeight, tempHeight);
+                    lastRight = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
                 }
             }
         }
@@ -62,7 +58,6 @@ public class AutoItemLayout extends LinearLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         final int count = getChildCount();
-        View lastChild = null;
         int lastRight = 0;
         int lastBottom = 0;
         int left, top, right, bottom;
@@ -71,35 +66,26 @@ public class AutoItemLayout extends LinearLayout {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
                 final LayoutParams layoutParams = (LayoutParams) child.getLayoutParams();
-                if (lastChild == null) {
+                int childLong = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
+                if (childLong > getMeasuredWidth()) {
+                    lastBottom = lastBottom + tempHeight;
+                    tempHeight = 0;
                     left = layoutParams.getMarginStart();
-                    top = layoutParams.topMargin;
+                    top = lastBottom + layoutParams.topMargin;
                     right = layoutParams.getMarginStart() + getViewWidth(child);
-                    bottom = layoutParams.topMargin + getViewHeight(child);
+                    bottom = lastBottom + layoutParams.topMargin + getViewHeight(child);
                     lastRight = layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
                 } else {
-                    int childLong = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
-                    if (childLong > getMeasuredWidth()) {
-                        lastBottom = lastBottom + tempHeight;
-                        tempHeight = 0;
-                        left = layoutParams.getMarginStart();
-                        top = lastBottom + layoutParams.topMargin;
-                        right = layoutParams.getMarginStart() + getViewWidth(child);
-                        bottom = lastBottom + layoutParams.topMargin + getViewHeight(child);
-                        lastRight = layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
-                    } else {
-                        left = lastRight + layoutParams.getMarginStart();
-                        top = lastBottom + layoutParams.topMargin;
-                        right = lastRight + layoutParams.getMarginStart() + getViewWidth(child);
-                        bottom = lastBottom + layoutParams.topMargin + getViewHeight(child);
-                        lastRight = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
+                    left = lastRight + layoutParams.getMarginStart();
+                    top = lastBottom + layoutParams.topMargin;
+                    right = lastRight + layoutParams.getMarginStart() + getViewWidth(child);
+                    bottom = lastBottom + layoutParams.topMargin + getViewHeight(child);
+                    lastRight = lastRight + layoutParams.getMarginStart() + getViewWidth(child) + layoutParams.getMarginEnd();
 
-                        int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
-                        tempHeight = Math.max(compareHeight, tempHeight);
-                    }
+                    int compareHeight = layoutParams.topMargin + getViewHeight(child) + layoutParams.bottomMargin;
+                    tempHeight = Math.max(compareHeight, tempHeight);
                 }
                 child.layout(left, top, right, bottom);
-                lastChild = child;
             }
         }
     }
