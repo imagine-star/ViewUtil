@@ -1,5 +1,9 @@
 package com.example.myview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -42,7 +46,7 @@ public class MainActivity extends Activity {
         AutoItemLayout autoLinearLayout = findViewById(R.id.auto_linearlayout);
         StringBuilder showString = new StringBuilder();
         List<AutoViewDataModel> viewList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 30; i++) {
             if (i % 11 == 0) {
                 showString = new StringBuilder();
             }
@@ -64,6 +68,38 @@ public class MainActivity extends Activity {
             textView.setText(dataModel.getName());
             autoLinearLayout.addView(textView);
         }
+
+        autoLinearLayout.setOnClickListener(v -> {
+            ObjectAnimator animator3 = ObjectAnimator.ofArgb(autoLinearLayout, "backgroundColor",
+                    getColor(R.color.black),
+                    getColor(R.color.blue),
+                    getColor(R.color.red),
+                    getColor(R.color.yellow),
+                    getColor(R.color.slateblue),
+                    getColor(R.color.black));
+            animator3.setDuration(3000);
+//            animator3.addListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    super.onAnimationEnd(animation);
+//                    animator3.start();
+//                }
+//            });
+            ObjectAnimator animator1 = ObjectAnimator.ofFloat(autoLinearLayout, "translationY", 0, -(autoLinearLayout.getHeight() + autoLinearLayout.getTop()));
+            animator1.setDuration(500);
+            ObjectAnimator animator2 = ObjectAnimator.ofFloat(autoLinearLayout, "translationY", autoLinearLayout.getHeight() + autoLinearLayout.getBottom(), 0);
+            animator2.setDuration(800);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(animator3).after(animator2).after(animator1);
+            animatorSet.start();
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    animatorSet.start();
+                }
+            });
+        });
 
     }
 
