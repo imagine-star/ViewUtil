@@ -7,6 +7,11 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+/*
+ * @author: LiuHaoQi
+ * @description: 根据屏幕宽度自动换行的容器View，用来解决GridLayout无法灵活展示长度不一的标签的问题，（动态添加子项）使用时，正常addView即可，无需设置参数
+ * @date: 2022/12/29 14:44
+ */
 public class AutoItemLayout extends LinearLayout {
 
     public AutoItemLayout(Context context) {
