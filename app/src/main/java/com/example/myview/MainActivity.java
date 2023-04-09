@@ -32,9 +32,9 @@ public class MainActivity extends Activity {
         setContentView(view);
 
         List<MyView> list = new ArrayList<>();
-        list.add(new MyTextView(this, "测试1"));
-        list.add(new MyTextView(this, "测试2"));
-        list.add(new MyTextView(this, "测试3"));
+        list.add(new MyTextView(this, "测试1", "测试1"));
+        list.add(new MyTextView(this, "测试2", "测试2"));
+        list.add(new MyTextView(this, "测试3", "测试3"));
         list.add(new MyEditText(this, "测试3", "请输入测试3"));
         list.add(new MyMemoEditText(this, "测试3", "请输入测试3"));
         for (MyView myView : list) {
