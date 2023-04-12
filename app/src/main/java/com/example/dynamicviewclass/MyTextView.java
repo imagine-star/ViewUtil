@@ -50,12 +50,12 @@ public class MyTextView extends MyView {
     private View.OnClickListener listener;
     /**
      * 非必填，右边内容的值
-     * showValue：需要上传显示的值时，用此值
+     * showValue 需要上传显示的值时，用此值
      */
     private String showValue;
     /**
      * 非必填，右边内容的值
-     * codeValue：需要上传显示对应的code时，用此值
+     * codeValue 需要上传显示对应的code时，用此值
      */
     private String codeValue;
 
@@ -78,9 +78,9 @@ public class MyTextView extends MyView {
     /**
      * 新增一个不附带任何操作，仅做基础展示的TextView
      *
-     * @param context：上下文，new一个View时使用
-     * @param serviceKey：对应服务器上传/获取时的字段名
-     * @param name：必填项，左边展示的文字
+     * @param context 上下文，new一个View时使用
+     * @param serviceKey 对应服务器上传/获取时的字段名
+     * @param name 必填项，左边展示的文字
      */
     public MyTextView(Context context, String serviceKey, String name) {
         this(context, serviceKey, name, "", "", false, false, null);
@@ -89,10 +89,10 @@ public class MyTextView extends MyView {
     /**
      * 新增一个带点击事件的TextView
      *
-     * @param context：上下文，new一个View时使用
-     * @param serviceKey：对应服务器上传/获取时的字段名
-     * @param name：必填项，左边展示的文字
-     * @param listener：非必填，点击事件
+     * @param context 上下文，new一个View时使用
+     * @param serviceKey 对应服务器上传/获取时的字段名
+     * @param name 必填项，左边展示的文字
+     * @param listener 非必填，点击事件
      */
     public MyTextView(Context context, String serviceKey, String name, View.OnClickListener listener) {
         this(context, serviceKey, name, "", "", false, false, listener);
@@ -101,14 +101,14 @@ public class MyTextView extends MyView {
     /**
      * 新增一个具备所需的所有要素的TextView
      *
-     * @param context：必填项，上下文
-     * @param serviceKey：必填项，服务器传输对应的key
-     * @param name：必填项，左边展示的文字
-     * @param value：非必填，右边内容的值 codeValue：需要上传显示对应的code时，用此值
-     * @param hintName：非必填，右边无内容时展示的内容
-     * @param needEdit：非必填，是否必填
-     * @param needShowRed：非必填，是否显示必填红点
-     * @param listener：非必填，点击事件
+     * @param context 必填项，上下文
+     * @param serviceKey 必填项，服务器传输对应的key
+     * @param name 必填项，左边展示的文字
+     * @param value 非必填，右边内容的值
+     * @param hintName 非必填，右边无内容时展示的内容
+     * @param needEdit 非必填，是否必填
+     * @param needShowRed 非必填，是否显示必填红点
+     * @param listener 非必填，点击事件
      */
     public MyTextView(Context context, String serviceKey, String name, String value, String hintName, boolean needEdit, boolean needShowRed, View.OnClickListener listener) {
         this.context = context;
