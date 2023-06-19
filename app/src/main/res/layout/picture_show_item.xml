@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@color/divider">
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="center"
+        android:src="@drawable/icon_image_add_new" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:padding="5dp"
+        android:src="@drawable/status_off_icon"
+        android:layout_gravity="right|top"/>
+
+</FrameLayout>

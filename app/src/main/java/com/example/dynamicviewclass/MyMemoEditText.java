@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.myview.R;
 
+
 /**
  * @Author LiuHaoQi
  * @Description 备注类特殊输入框通用View
@@ -21,104 +23,169 @@ import com.example.myview.R;
  */
 public class MyMemoEditText extends MyView {
 
-    /**
+    /*
      * 必填项，上下文
-     */
+     * */
     private Context context;
-    /**
+    /*
      * 必填项，左边展示的文字
-     */
-    private String name;
-    /**
+     * */
+    private String name = "";
+    /*
      * 必填项，服务器传输对应的key
-     */
-    private String serviceKey;
-    /**
+     * */
+    private String serviceKey = "";
+    /*
      * 非必填，输入类型
-     */
+     * */
     private int inputType = InputType.TYPE_NULL;
-    /**
+    /*
      * 非必填，能否编辑
-     */
+     * */
     private boolean canEdit = true;
-    /**
+    /*
      * 非必填，是否必填
-     */
+     * */
     private boolean needEdit = false;
-    /**
+    /*
      * 非必填，是否显示必填红点
-     */
+     * */
     private boolean needShowRed = false;
-    /**
+    /*
      * 非必填，右边无内容时展示的内容
-     */
-    private String hintName;
-    /**
+     * */
+    private String hintName = "";
+    /*
      * 非必填，最大输入长度
-     */
+     * */
     private int maxLength = 0;
-    /**
+    /*
      * 非必填，右边内容的值
-     * 需要上传显示的值时，用此值
-     */
-    private String showValue;
-    /**
-     * 非必填，右边内容的值
-     * 需要上传显示对应的code时，用此值
-     */
-    private String codeValue;
+     * showValue：需要上传显示的值时，用此值
+     * codeValue：需要上传显示对应的code时，用此值
+     * */
+    private String showValue = "";
+    private String codeValue = "";
 
     private EditText editText;
     private LinearLayout linearLayout;
 
-    /**
-     * 新增一个不附带任何操作，仅做基础编辑的EditText
-     *
-     * @param context 上下文，new一个View时使用
-     * @param serviceKey 对应服务器上传/获取时的字段名
-     * @param name 必填项，左边展示的文字
-     */
-    public MyMemoEditText(Context context, String serviceKey, String name) {
-        this(context,serviceKey, name, "", "", true, false, false, 0);
-    }
-
-    /**
-     * 新增一个带点击事件的EditText
-     *
-     * @param context 上下文，new一个View时使用
-     * @param serviceKey 对应服务器上传/获取时的字段名
-     * @param name 必填项，左边展示的文字
-     * @param hintName 非必填，提示输入内容的文字
-     */
-    public MyMemoEditText(Context context, String serviceKey, String name, String hintName) {
-        this(context, serviceKey, name, "", hintName, true, false, false, 0);
-    }
-
-    /**
-     * 新增一个具备所需的所有要素的EditText
-     *
-     * @param context 必填项，上下文
-     * @param serviceKey 必填项，服务器传输对应的key
-     * @param name 必填项，左边展示的文字
-     * @param value 非必填，右边内容的值
-     * @param hintName 非必填，右边无内容时展示的内容
-     * @param canEdit 非必填，是否可编辑
-     * @param needEdit 非必填，是否必填
-     * @param needShowRed 非必填，是否显示必填红点
-     * @param maxLength 非必填，最长输入内容长度
-     */
-    public MyMemoEditText(Context context, String serviceKey, String name, String value, String hintName, boolean canEdit, boolean needEdit, boolean needShowRed, int maxLength) {
+    public MyMemoEditText(Context context) {
         this.context = context;
-        this.serviceKey = serviceKey;
-        this.name = name;
-        this.showValue = value;
-        this.hintName = hintName;
-        this.canEdit = canEdit;
-        this.needShowRed = needShowRed;
-        this.maxLength = maxLength;
-        drawView(context, name, value, hintName, canEdit, needShowRed, maxLength);
-        this.needEdit = needEdit;
     }
+
+    /**
+     * 必填项，服务器传输对应的key
+     * @param serviceKey
+     * @return
+     */
+    public MyMemoEditText serviceKey(String serviceKey) {
+        this.serviceKey = serviceKey;
+        return this;
+    }
+
+    /**
+     * 必填项，左边展示的文字
+     * @param name
+     * @return
+     */
+    public MyMemoEditText name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * 非必填，右边内容的值
+     * showValue：显示的值
+     * @param value
+     * @return
+     */
+    public MyMemoEditText value(String value) {
+        this.showValue = value;
+        return this;
+    }
+
+    /**
+     * 非必填，右边无内容时展示的内容
+     * @param hintName
+     * @return
+     */
+    public MyMemoEditText hintName(String hintName) {
+        this.hintName = hintName;
+        return this;
+    }
+
+    /**
+     * 非必填，能否编辑，默认可编辑
+     * @param canEdit
+     * @return
+     */
+    public MyMemoEditText canEdit(boolean canEdit) {
+        this.canEdit = canEdit;
+        return this;
+    }
+
+    /**
+     * 非必填，是否必填，默认非必填
+     * @param needEdit
+     * @return
+     */
+    public MyMemoEditText needEdit(boolean needEdit) {
+        this.needEdit = needEdit;
+        return this;
+    }
+
+    /**
+     * 非必填，是否显示必填红点，默认不显示
+     * @param needShowRed
+     * @return
+     */
+    public MyMemoEditText needShowRed(boolean needShowRed) {
+        this.needShowRed = needShowRed;
+        return this;
+    }
+
+    /**
+     * 非必填，最大输入长度，默认为0不限制
+     * @param maxLength
+     * @return
+     */
+    public MyMemoEditText maxLength(int maxLength) {
+        this.maxLength = maxLength;
+        return this;
+    }
+
+    public MyMemoEditText build() {
+        if (TextUtils.isEmpty(name)) {
+            return null;
+        }
+        if (TextUtils.isEmpty(serviceKey)) {
+            return null;
+        }
+        drawView();
+        return this;
+    }
+
+//    public MyMemoEditText(Context context, String serviceKey, String name) {
+//        this(context,serviceKey, name, "", "", true, false, false, 0);
+//    }
+//
+//    public MyMemoEditText(Context context, String serviceKey, String name, String hintName) {
+//        this(context, serviceKey, name, "", hintName, true, false, false, 0);
+//    }
+//
+//    public MyMemoEditText(Context context, String serviceKey, String name, String value, String hintName, boolean canEdit, boolean needEdit, boolean needShowRed, int maxLength) {
+//        this.context = context;
+//        this.serviceKey = serviceKey;
+//        this.name = name;
+//        this.showValue = value;
+//        this.hintName = hintName;
+//        this.canEdit = canEdit;
+//        this.needShowRed = needShowRed;
+//        this.maxLength = maxLength;
+//        drawView(context, name, value, hintName, canEdit, needShowRed, maxLength);
+//        this.needEdit = needEdit;
+//    }
 
     @Override
     public String getShowName() {
@@ -158,7 +225,7 @@ public class MyMemoEditText extends MyView {
     }
 
     @SuppressLint("SetTextI18n")
-    public void drawView(Context context, String name, String value, String hintName, boolean canEdit, boolean needShowRed, int maxLength) {
+    private void drawView() {
 
         linearLayout = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -195,7 +262,7 @@ public class MyMemoEditText extends MyView {
         editText.setBackground(context.getResources().getDrawable(R.drawable.background_white_radius_blank));
         editText.setTextColor(context.getResources().getColor(R.color.text_color));
         editText.setTextSize(14);
-        editText.setText(value);
+        editText.setText(showValue);
         editText.setHint(hintName);
         editText.setGravity(Gravity.TOP|Gravity.LEFT);
         if (inputType != InputType.TYPE_NULL) {
