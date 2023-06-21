@@ -51,19 +51,32 @@ public class PictureShowAdapter extends RecyclerView.Adapter<PictureShowAdapter.
             holder.picture.setImageResource(R.drawable.icon_image_add_new);
             holder.picture.setOnClickListener(listener);
         } else {
-            holder.picture.setOnClickListener(null);
-            holder.delete.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load(pictureList.get(position))
-                    .into(holder.picture);
-            holder.delete.setTag(pictureList.get(position));
-            holder.delete.setOnClickListener(deleteClick);
+            if (deleteClick == null) {
+                holder.picture.setOnClickListener(null);
+                holder.delete.setVisibility(View.GONE);
+                Glide.with(context)
+                        .load(pictureList.get(position))
+                        .into(holder.picture);
+                holder.delete.setTag(pictureList.get(position));
+                holder.delete.setOnClickListener(deleteClick);
+            } else {
+                holder.picture.setOnClickListener(null);
+                holder.delete.setVisibility(View.VISIBLE);
+                Glide.with(context)
+                        .load(pictureList.get(position))
+                        .into(holder.picture);
+                holder.delete.setTag(pictureList.get(position));
+                holder.delete.setOnClickListener(deleteClick);
+            }
         }
     }
 
     @Override
     public int getItemCount() {
         int num = pictureList == null ? 0 : pictureList.size();
+        if (listener == null) {
+            return num;
+        }
         if (pictureNum > num) {
             return num + 1;
         } else {
