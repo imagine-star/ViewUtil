@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.example.myview.R;
 
+import java.util.List;
+
+
 /**
  * @Author LiuHaoQi
  * @Description 自动生成的EditText类
@@ -35,8 +38,8 @@ public class MyEditText extends MyView {
      * */
     private String serviceKey;
     /*
-    * 非必填，输入类型
-    * */
+     * 非必填，输入类型
+     * */
     private int inputType = InputType.TYPE_NULL;
     /*
      * 非必填，单位
@@ -59,8 +62,8 @@ public class MyEditText extends MyView {
      * */
     private String hintName;
     /*
-    * 非必填，最大输入长度
-    * */
+     * 非必填，最大输入长度
+     * */
     private int maxLength = 0;
     /*
      * 非必填，右边内容的值
@@ -73,28 +76,129 @@ public class MyEditText extends MyView {
     private EditText editText;
     private LinearLayout linearLayout;
 
-    public MyEditText(Context context, String serviceKey, String name) {
-        this(context, serviceKey, name, "", "", "", true, false, false, 0);
-    }
-
-    public MyEditText(Context context, String serviceKey, String name, String hintName) {
-        this(context, serviceKey, name, "", "", hintName, true, false, false, 0);
-    }
-
-    public MyEditText(Context context, String serviceKey, String name, String value, String unit, String hintName, boolean canEdit, boolean needEdit, boolean needShowRed, int maxLength) {
+    public MyEditText(Context context) {
         this.context = context;
-        this.serviceKey = serviceKey;
-        this.name = name;
-        this.showValue = value;
-        this.unit = unit;
-        this.hintName = hintName;
-        this.canEdit = canEdit;
-        this.needShowRed = needShowRed;
-        this.maxLength = maxLength;
-        drawView(context, name, value, unit, hintName, canEdit, needShowRed, maxLength);
-        this.needEdit = needEdit;
     }
-    
+
+    public MyEditText inputType(int inputType) {
+        this.inputType = inputType;
+        return this;
+    }
+
+    /**
+     * 必填项，服务器传输对应的key
+     * @param serviceKey
+     * @return
+     */
+    public MyEditText serviceKey(String serviceKey) {
+        this.serviceKey = serviceKey;
+        return this;
+    }
+
+    /**
+     * 必填项，左边展示的文字
+     * @param name
+     * @return
+     */
+    public MyEditText name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * 非必填，右边内容的值
+     * showValue：显示的值
+     * @param value
+     * @return
+     */
+    public MyEditText value(String value) {
+        this.showValue = value;
+        return this;
+    }
+
+    /**
+     * 非必填，右边无内容时展示的内容
+     * @param hintName
+     * @return
+     */
+    public MyEditText hintName(String hintName) {
+        this.hintName = hintName;
+        return this;
+    }
+
+    /**
+     * 非必填，能否编辑，默认可编辑
+     * @param canEdit
+     * @return
+     */
+    public MyEditText canEdit(boolean canEdit) {
+        this.canEdit = canEdit;
+        return this;
+    }
+
+    /**
+     * 非必填，是否必填，默认非必填
+     * @param needEdit
+     * @return
+     */
+    public MyEditText needEdit(boolean needEdit) {
+        this.needEdit = needEdit;
+        return this;
+    }
+
+    /**
+     * 非必填，是否显示必填红点，默认不显示
+     * @param needShowRed
+     * @return
+     */
+    public MyEditText needShowRed(boolean needShowRed) {
+        this.needShowRed = needShowRed;
+        return this;
+    }
+
+    /**
+     * 非必填，最大输入长度，默认为0不限制
+     * @param maxLength
+     * @return
+     */
+    public MyEditText maxLength(int maxLength) {
+        this.maxLength = maxLength;
+        return this;
+    }
+
+    public MyEditText build() {
+        if (TextUtils.isEmpty(name)) {
+            return null;
+        }
+        if (TextUtils.isEmpty(serviceKey)) {
+            return null;
+        }
+        drawView();
+        return this;
+    }
+
+//    public MyEditText(Context context, String serviceKey, String name) {
+//        this(context, serviceKey, name, "", "", "", true, false, false, 0);
+//    }
+//
+//    public MyEditText(Context context, String serviceKey, String name, String hintName) {
+//        this(context, serviceKey, name, "", "", hintName, true, false, false, 0);
+//    }
+//
+//    public MyEditText(Context context, String serviceKey, String name, String value, String unit, String hintName, boolean canEdit, boolean needEdit, boolean needShowRed, int maxLength) {
+//        this.context = context;
+//        this.serviceKey = serviceKey;
+//        this.name = name;
+//        this.showValue = value;
+//        this.unit = unit;
+//        this.hintName = hintName;
+//        this.canEdit = canEdit;
+//        this.needShowRed = needShowRed;
+//        this.maxLength = maxLength;
+//        drawView(context, name, value, unit, hintName, canEdit, needShowRed, maxLength);
+//        this.needEdit = needEdit;
+//    }
+
     @Override
     public String getShowName() {
         return name;
@@ -107,6 +211,11 @@ public class MyEditText extends MyView {
         if (editText != null) {
             editText.setText(name);
         }
+    }
+
+    @Override
+    public void setValue(List<String> list) {
+
     }
 
     @Override
@@ -133,7 +242,7 @@ public class MyEditText extends MyView {
     }
 
     @SuppressLint("SetTextI18n")
-    public void drawView(Context context, String name, String value, String unit, String hintName, boolean canEdit, boolean needShowRed, int maxLength) {
+    private void drawView() {
 
         linearLayout = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -178,7 +287,7 @@ public class MyEditText extends MyView {
         editText.setSingleLine(true);
         editText.setTextColor(context.getResources().getColor(R.color.text_color));
         editText.setTextSize(14);
-        editText.setText(value);
+        editText.setText(showValue);
         editText.setHint(hintName);
         if (inputType != InputType.TYPE_NULL) {
             editText.setInputType(inputType);

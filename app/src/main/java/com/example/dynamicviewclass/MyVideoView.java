@@ -22,7 +22,7 @@ import java.util.List;
  * @Description
  * @Date 2023/6/19 16:48
  */
-public class MyPictureView extends MyView {
+public class MyVideoView extends MyView {
 
     /*
      * 必填项，上下文
@@ -63,21 +63,21 @@ public class MyPictureView extends MyView {
     /*
      * 非必填，图片列表
      * */
-    private List<String> pictureList = new ArrayList<>();
+    private List<String> videoList = new ArrayList<>();
 
     /**
      * 是否是网络图片
      */
-    private boolean netPicture;
+    private boolean netVideo;
 
     private LinearLayout linearLayout;
 
     private View.OnClickListener listener = null;
     private View.OnClickListener clickListener = null;
     private View.OnClickListener deleteClick = null;
-    private PictureShowAdapter adapter = null;
+    private VideoAdapter adapter = null;
 
-    public MyPictureView(Context context) {
+    public MyVideoView(Context context) {
         this.context = context;
     }
 
@@ -86,7 +86,7 @@ public class MyPictureView extends MyView {
      * @param serviceKey
      * @return
      */
-    public MyPictureView serviceKey(String serviceKey) {
+    public MyVideoView serviceKey(String serviceKey) {
         this.serviceKey = serviceKey;
         return this;
     }
@@ -96,7 +96,7 @@ public class MyPictureView extends MyView {
      * @param name
      * @return
      */
-    public MyPictureView name(String name) {
+    public MyVideoView name(String name) {
         this.name = name;
         return this;
     }
@@ -104,11 +104,11 @@ public class MyPictureView extends MyView {
     /**
      * 非必填，图片列表
      * showValue：显示的值
-     * @param pictureList
+     * @param videoList
      * @return
      */
-    public MyPictureView pictureList(List<String> pictureList) {
-        this.pictureList = pictureList;
+    public MyVideoView videoList(List<String> videoList) {
+        this.videoList = videoList;
         return this;
     }
 
@@ -117,7 +117,7 @@ public class MyPictureView extends MyView {
      * @param hintName
      * @return
      */
-    public MyPictureView hintName(String hintName) {
+    public MyVideoView hintName(String hintName) {
         this.hintName = hintName;
         return this;
     }
@@ -127,7 +127,7 @@ public class MyPictureView extends MyView {
      * @param canEdit
      * @return
      */
-    public MyPictureView canEdit(boolean canEdit) {
+    public MyVideoView canEdit(boolean canEdit) {
         this.canEdit = canEdit;
         return this;
     }
@@ -137,7 +137,7 @@ public class MyPictureView extends MyView {
      * @param needEdit
      * @return
      */
-    public MyPictureView needEdit(boolean needEdit) {
+    public MyVideoView needEdit(boolean needEdit) {
         this.needEdit = needEdit;
         return this;
     }
@@ -147,7 +147,7 @@ public class MyPictureView extends MyView {
      * @param needShowRed
      * @return
      */
-    public MyPictureView needShowRed(boolean needShowRed) {
+    public MyVideoView needShowRed(boolean needShowRed) {
         this.needShowRed = needShowRed;
         return this;
     }
@@ -157,32 +157,32 @@ public class MyPictureView extends MyView {
      * @param maxLength
      * @return
      */
-    public MyPictureView maxLength(int maxLength) {
+    public MyVideoView maxLength(int maxLength) {
         this.maxLength = maxLength;
         return this;
     }
 
-    public MyPictureView netPicture(boolean netPicture) {
-        this.netPicture = netPicture;
+    public MyVideoView netVideo(boolean netVideo) {
+        this.netVideo = netVideo;
         return this;
     }
 
-    public MyPictureView listener(View.OnClickListener listener) {
+    public MyVideoView listener(View.OnClickListener listener) {
         this.listener = listener;
         return this;
     }
-
-    public MyPictureView clickListener(View.OnClickListener clickListener) {
+    
+    public MyVideoView clickListener(View.OnClickListener clickListener) {
         this.clickListener = clickListener;
         return this;
     }
 
-    public MyPictureView deleteClick(View.OnClickListener deleteClick) {
+    public MyVideoView deleteClick(View.OnClickListener deleteClick) {
         this.deleteClick = deleteClick;
         return this;
     }
 
-    public MyPictureView build() {
+    public MyVideoView build() {
         if (TextUtils.isEmpty(name)) {
             return null;
         }
@@ -228,14 +228,14 @@ public class MyPictureView extends MyView {
         GridLayoutManager layoutManager = new GridLayoutManager(context, 3);
         recyclerView.setLayoutManager(layoutManager);
         if (canEdit) {
-            adapter = new PictureShowAdapter(context, pictureList, maxLength, listener, clickListener, deleteClick, netPicture);
+            adapter = new VideoAdapter(context, videoList, maxLength, listener, clickListener, deleteClick, netVideo);
         } else {
-            adapter = new PictureShowAdapter(context, pictureList, maxLength, null, clickListener, null, netPicture);
+            adapter = new VideoAdapter(context, videoList, maxLength, null, clickListener, null, netVideo);
         }
         recyclerView.setAdapter(adapter);
         linearLayout.addView(recyclerView);
     }
-
+    
     @Override
     public String getShowName() {
         return name;
@@ -247,14 +247,14 @@ public class MyPictureView extends MyView {
     }
 
     @Override
-    public void setValue(List<String> pictureList) {
-        this.pictureList = pictureList;
-        adapter.update(pictureList);
+    public void setValue(List<String> videoList) {
+        this.videoList = videoList;
+        adapter.upData(videoList);
     }
 
     @Override
     public Object getValue() {
-        return adapter.pictureList;
+        return adapter.videoList;
     }
 
     @Override
@@ -272,7 +272,7 @@ public class MyPictureView extends MyView {
         return serviceKey;
     }
 
-    public PictureShowAdapter getAdapter() {
+    public VideoAdapter getAdapter() {
         return adapter;
     }
 }

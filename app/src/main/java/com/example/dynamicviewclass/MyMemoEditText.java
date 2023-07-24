@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.myview.R;
 
+import java.util.List;
 
 /**
  * @Author LiuHaoQi
@@ -202,6 +203,11 @@ public class MyMemoEditText extends MyView {
     }
 
     @Override
+    public void setValue(List<String> list) {
+
+    }
+
+    @Override
     public Object getValue() {
         if (editText != null) {
             return editText.getText().toString().trim();
@@ -286,5 +292,5 @@ public class MyMemoEditText extends MyView {
         linearLayout.addView(line);
 
     }
-    
+
 }

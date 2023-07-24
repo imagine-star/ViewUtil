@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -20,14 +21,16 @@ public class PictureShowAdapter extends RecyclerView.Adapter<PictureShowAdapter.
     public List<String> pictureList;
     public int pictureNum;
     public View.OnClickListener listener;
+    public View.OnClickListener clickListener;
     public View.OnClickListener deleteClick;
     public boolean netPicture;
 
-    public PictureShowAdapter(Context context, List<String> pictureList, int pictureNum, View.OnClickListener listener, View.OnClickListener deleteClick, boolean netPicture) {
+    public PictureShowAdapter(Context context, List<String> pictureList, int pictureNum, View.OnClickListener listener, View.OnClickListener clickListener, View.OnClickListener deleteClick, boolean netPicture) {
         this.context = context;
         this.pictureList = pictureList;
         this.pictureNum = pictureNum;
         this.listener = listener;
+        this.clickListener = clickListener;
         this.deleteClick = deleteClick;
         this.netPicture = netPicture;
     }
@@ -51,8 +54,9 @@ public class PictureShowAdapter extends RecyclerView.Adapter<PictureShowAdapter.
             holder.picture.setImageResource(R.drawable.icon_image_add_new);
             holder.picture.setOnClickListener(listener);
         } else {
+            holder.item.setTag(pictureList.get(position));
+            holder.item.setOnClickListener(clickListener);
             if (deleteClick == null) {
-                holder.picture.setOnClickListener(null);
                 holder.delete.setVisibility(View.GONE);
                 Glide.with(context)
                         .load(pictureList.get(position))
@@ -60,7 +64,6 @@ public class PictureShowAdapter extends RecyclerView.Adapter<PictureShowAdapter.
                 holder.delete.setTag(pictureList.get(position));
                 holder.delete.setOnClickListener(deleteClick);
             } else {
-                holder.picture.setOnClickListener(null);
                 holder.delete.setVisibility(View.VISIBLE);
                 Glide.with(context)
                         .load(pictureList.get(position))
@@ -86,10 +89,12 @@ public class PictureShowAdapter extends RecyclerView.Adapter<PictureShowAdapter.
 
     class MyHolder extends RecyclerView.ViewHolder {
 
+        private FrameLayout item;
         public ImageView picture, delete;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
+            item = itemView.findViewById(R.id.item);
             picture = itemView.findViewById(R.id.picture);
             delete = itemView.findViewById(R.id.delete);
         }

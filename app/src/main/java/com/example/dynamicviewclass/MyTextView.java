@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.myview.R;
 
+import java.util.List;
+
 /**
  * @Author LiuHaoQi
  * @Description 自动化生成的显示View
@@ -29,8 +31,8 @@ public class MyTextView extends MyView {
      * */
     private String name = "";
     /*
-    * 必填项，服务器传输对应的key
-    * */
+     * 必填项，服务器传输对应的key
+     * */
     private String serviceKey = "";
     /*
      * 非必填，是否必填
@@ -45,8 +47,8 @@ public class MyTextView extends MyView {
      * */
     private String hintName = "";
     /*
-    * 非必填，点击事件
-    * */
+     * 非必填，点击事件
+     * */
     private View.OnClickListener listener = null;
     /*
      * 非必填，右边内容的值
@@ -59,8 +61,8 @@ public class MyTextView extends MyView {
     public final static int SHOW_VALUE = 1;
     public final static int CODE_VALUE = 2;
     /*
-    * 设定一个特殊值，用来判断此textView获取的是显示值还是value
-    * */
+     * 设定一个特殊值，用来判断此textView获取的是显示值还是value
+     * */
     private int valueType = SHOW_VALUE;
 
     private TextView textView;
@@ -96,8 +98,9 @@ public class MyTextView extends MyView {
      * @param value
      * @return
      */
-    public MyTextView value(String value) {
-        this.showValue = value;
+    public MyTextView value(String name, String code) {
+        showValue = name;
+        codeValue = code;
         return this;
     }
 
@@ -181,24 +184,22 @@ public class MyTextView extends MyView {
         }
     }
 
-    private String getShowValue() {
+    @Override
+    public void setValue(List<String> list) {
+
+    }
+
+    public String getShowValue() {
         return showValue;
     }
 
-    private String getCodeValue() {
+    public String getCodeValue() {
         return codeValue;
     }
 
     @Override
     public Object getValue() {
-        switch (valueType) {
-            case SHOW_VALUE:
-                return getShowValue();
-            case CODE_VALUE:
-                return getCodeValue();
-            default:
-                return "";
-        }
+        return getCodeValue();
     }
 
     @Override
