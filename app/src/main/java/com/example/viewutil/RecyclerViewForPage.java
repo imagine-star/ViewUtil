@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.my_interface.OnChangePageListener;
 
+import java.util.List;
+
 public class RecyclerViewForPage extends RecyclerView {
 
     private OnChangePageListener changePageListener;
@@ -27,8 +29,49 @@ public class RecyclerViewForPage extends RecyclerView {
     }
 
     private int pageNo = 1;
+    private int itemNumber = 15;
+    private int clickPage = 1;
     //用来标记是否正在向上滑动
     private boolean isSlidingUp = false;
+
+    /**
+     * 在适配器中发生点击事件时，点击事件处理的最后步骤调用此方法并传入下标和list数据
+     * 通过下标计算出当前页，然后删除当前页及之后的所有数据，并且pageNo设置为当前页
+     * 在返回刷新时获取当前页的数据
+     * @param position
+     * @param list
+     * @return
+     */
+    public List<?> setClickPage(int position, List<?> list) {
+        clickPage = position/itemNumber + 1;
+        pageNo = clickPage;
+        for (int index = list.size() - 1; index >= getRemoveIndex(); index--) {
+            if (list.size() > index) {
+                list.remove(index);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 计算应该删除的第一个数据的下标
+     * @return
+     */
+    public int getRemoveIndex() {
+        return (clickPage - 1) * itemNumber;
+    }
+
+    public int getClickPage() {
+        return clickPage;
+    }
+
+    public void setItemNumber(int itemNumber) {
+        this.itemNumber = itemNumber;
+    }
+
+    public int getItemNumber() {
+        return itemNumber;
+    }
 
     /**
      * 重置当前页数据
@@ -43,11 +86,7 @@ public class RecyclerViewForPage extends RecyclerView {
      * 在onResume函数中调用此函数即可
      */
     public void refreshPage() {
-        int i = 1;
-        while (i <= pageNo) {
-            changePageListener.onLoadData(i);
-            i++;
-        }
+        changePageListener.onLoadData(pageNo);
     }
 
     /**
@@ -80,11 +119,12 @@ public class RecyclerViewForPage extends RecyclerView {
                     //获取最后一个完全显示的itemPosition
                     int lastItemPosition = manager.findLastCompletelyVisibleItemPosition();
                     int itemCount = manager.getItemCount();
-                    // 判断是否滑动到了最后一个item，并且是向上滑动
-                    if (lastItemPosition == (itemCount - 1) && isSlidingUp) {
+                    // 判断是否滑动到了最后一个item，并且item数量大于单页数量时，获取下一页内容
+                    if (lastItemPosition == (itemCount - 1) && itemCount >= itemNumber) {
                         //加载更多
                         if (changePageListener != null) {
-                            pageNo++;
+                            //之前用pageNo++增加页数，会有一直上拉一直加的问题，改为通过item数量计算下一页的值
+                            pageNo = itemCount/itemNumber + 1;
                             changePageListener.onLoadData(pageNo);
                         }
                     }
