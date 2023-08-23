@@ -123,8 +123,7 @@ public class RecyclerViewForPage extends RecyclerView {
                     if (lastItemPosition == (itemCount - 1) && itemCount >= itemNumber) {
                         //加载更多
                         if (changePageListener != null) {
-                            //之前用pageNo++增加页数，会有一直上拉一直加的问题，改为通过item数量计算下一页的值
-                            pageNo = itemCount/itemNumber + 1;
+                            pageNo++;
                             changePageListener.onLoadData(pageNo);
                         }
                     }
