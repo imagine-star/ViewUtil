@@ -28,7 +28,7 @@ public class RecyclerViewForPage extends RecyclerView {
         super(context, attrs, defStyleAttr);
     }
 
-    private int pageNo = 1;
+    private int pageNo = 0;
     private int itemNumber = 15;
     private int clickPage = 1;
     //用来标记是否正在向上滑动
@@ -77,7 +77,7 @@ public class RecyclerViewForPage extends RecyclerView {
      * 重置当前页数据
      */
     public void resetPage() {
-        pageNo = 1;
+        pageNo = 0;
         changePageListener.onLoadData(pageNo);
     }
 
