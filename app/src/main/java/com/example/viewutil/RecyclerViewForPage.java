@@ -109,6 +109,9 @@ public class RecyclerViewForPage extends RecyclerView {
      */
     public void setPageListener(OnChangePageListener changePageListener) {
         this.changePageListener = changePageListener;
+        if (pageNo == 0 && this.changePageListener != null) {
+            this.changePageListener.onLoadData(pageNo);
+        }
         this.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
