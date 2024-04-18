@@ -1,4 +1,4 @@
-package com.mine.mylibrary.viewutil;
+package com.example.viewutil;
 
 import android.content.Context;
 import android.util.AttributeSet;

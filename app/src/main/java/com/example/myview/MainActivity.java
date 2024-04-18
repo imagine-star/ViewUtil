@@ -10,14 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dynamicviewclass.MyEditText;
-import com.example.dynamicviewclass.MyMemoEditText;
-import com.example.dynamicviewclass.MyTextView;
-import com.example.dynamicviewclass.MyView;
 import com.example.myview.databinding.ActivityMainBinding;
-import com.mine.mylibrary.viewutil.DrawCorner;
+import com.example.viewutil.DrawCorner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -30,19 +25,10 @@ public class MainActivity extends Activity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+    }
 
-        List<MyView> list = new ArrayList<>();
-        list.add(new MyTextView(this, "测试1", "测试1"));
-        list.add(new MyTextView(this, "测试2", "测试2"));
-        list.add(new MyTextView(this, "测试3", "测试3"));
-        list.add(new MyEditText(this, "测试3", "请输入测试3"));
-        list.add(new MyMemoEditText(this, "测试3", "请输入测试3"));
-        for (MyView myView : list) {
-            if (myView.getView() != null) {
-                binding.linearlayout.addView(myView.getView());
-            }
-        }
-
+    public static void main(String[] args) {
+        
     }
 
     class MyTestAdapter extends RecyclerView.Adapter<MyTestAdapter.MyHolder> {

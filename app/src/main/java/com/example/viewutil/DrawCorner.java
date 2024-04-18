@@ -1,4 +1,4 @@
-package com.mine.mylibrary.viewutil;
+package com.example.viewutil;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
