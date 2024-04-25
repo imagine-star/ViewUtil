@@ -27,10 +27,6 @@ public class MainActivity extends Activity {
         setContentView(view);
     }
 
-    public static void main(String[] args) {
-        
-    }
-
     class MyTestAdapter extends RecyclerView.Adapter<MyTestAdapter.MyHolder> {
 
         List<Integer> adapterList;

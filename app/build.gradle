@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 26
@@ -28,6 +28,8 @@ android {
     viewBinding {
         enabled = true
     }
+    ndkVersion '21.0.6113669'
+    buildToolsVersion '28.0.3'
 
 }
 
@@ -35,7 +37,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.annotation:annotation-jvm:1.6.0'
+    implementation 'androidx.annotation:annotation:1.6.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
