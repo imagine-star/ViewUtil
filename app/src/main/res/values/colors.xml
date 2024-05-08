@@ -152,4 +152,6 @@
     <color name="black">#000000</color> <!-- 黑色 -->
     <color name="divider">#dddddd</color>
     <color name="text_color">#000000</color>
+    <color name="gray_D8D8D8">#FFD8D8D8</color>
+    <color name="blue_line">#FF00B6FF</color>
 </resources>
